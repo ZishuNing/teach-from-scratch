@@ -24,6 +24,8 @@ For code gears, the build site is chosen dynamically: a sandbox `./build/` for s
 
 ## Files
 
+The skill lives in [`teach-from-scratch/`](./teach-from-scratch/):
+
 - `SKILL.md` — the skill body: intake, teardown, build loop, practice
 - `GEARS.md` — the four gears and how to choose
 - `BUILD-PLAN-FORMAT.md` — format of the build plan (single source of truth)
@@ -31,7 +33,7 @@ For code gears, the build site is chosen dynamically: a sandbox `./build/` for s
 
 ## Usage
 
-Works with agent CLIs that support skills (e.g. Claude Code, Kimi Code). Symlink or copy this directory into your user skills directory (`~/.claude/skills/`, `~/.agents/skills/`, …), then invoke it:
+Works with agent CLIs that support skills (e.g. Claude Code, Kimi Code). Clone this repo, then symlink or copy the `teach-from-scratch/` folder into your user skills directory (`~/.claude/skills/`, `~/.agents/skills/`, …), and invoke it:
 
 ```
 /teach-from-scratch What system would you like to build from scratch?
