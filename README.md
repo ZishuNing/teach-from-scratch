@@ -27,9 +27,9 @@ For code gears, the build site is chosen dynamically: a sandbox `./build/` for s
 The skill lives in [`teach-from-scratch/`](./teach-from-scratch/):
 
 - `SKILL.md` — the skill body: intake, teardown, build loop, practice
-- `GEARS.md` — the four gears and how to choose
-- `BUILD-PLAN-FORMAT.md` — format of the build plan (single source of truth)
-- `STEP-FORMAT.md` — format of each step's HTML file
+- `references/GEARS.md` — the four gears and how to choose
+- `references/BUILD-PLAN-FORMAT.md` — format of the build plan (single source of truth)
+- `references/STEP-FORMAT.md` — format of each step's HTML file
 
 ## Usage
 

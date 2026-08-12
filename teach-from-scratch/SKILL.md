@@ -19,8 +19,8 @@ Never introduce a concept before its gap has been felt. An abstraction that arri
 
 ## Workspace
 
-- `BUILD-PLAN.md` — the target, the gear, the build site, and the ordered chain of steps with progress. The single source of truth for where the build stands. Format: [BUILD-PLAN-FORMAT.md](./BUILD-PLAN-FORMAT.md).
-- `./steps/*.html` — one file per step, `0001-<dash-case-name>.html`. Format: [STEP-FORMAT.md](./STEP-FORMAT.md).
+- `BUILD-PLAN.md` — the target, the gear, the build site, and the ordered chain of steps with progress. The single source of truth for where the build stands. Format: [BUILD-PLAN-FORMAT.md](./references/BUILD-PLAN-FORMAT.md).
+- `./steps/*.html` — one file per step, `0001-<dash-case-name>.html`. Format: [STEP-FORMAT.md](./references/STEP-FORMAT.md).
 - `./reference/*.html` — compressed, printable reference distilled from steps: the final architecture, interface tables, glossary. Steps are read once; reference is read forever.
 - `./assets/*` — reusable components shared by every step: stylesheet first, then quiz widgets, diagram helpers, anything a second step would otherwise duplicate. Read this directory before authoring a step, and put anything reusable here instead of inlining it.
 - `NOTES.md` — user preferences and working notes.
@@ -33,7 +33,7 @@ Author steps and reference in the user's language. Keep code, identifiers, and p
 Ask the user, in one round:
 
 1. **Target** — what system, and against which source? A real repo to reverse-engineer, a paper, a spec, or your reconstruction from trusted sources. Get the path or URL.
-2. **Gear** — read [GEARS.md](./GEARS.md) and present the four gears: `simplified-paper`, `full-paper`, `skeleton`, `full`. The gear decides how much fidelity every later decision buys.
+2. **Gear** — read [GEARS.md](./references/GEARS.md) and present the four gears: `simplified-paper`, `full-paper`, `skeleton`, `full`. The gear decides how much fidelity every later decision buys.
 3. **Practice form** — quiz only, write-it-yourself only, or both.
 4. **Build site** — where the code lives, for the code gears only. Judge it yourself first and propose: a sandbox `./build/` for anything self-contained; the user's own project when the target only exists inside a host (a UE camera system belongs in their UE project, not a sandbox). Ask only if you genuinely cannot tell.
 
@@ -60,7 +60,7 @@ Show the chain to the user and get confirmation before building. A wrong chain w
 
 Build exactly the next unbuilt step in the chain. Never build ahead, never bundle two steps into one file.
 
-Each step file follows [STEP-FORMAT.md](./STEP-FORMAT.md) and, per the chosen gear ([GEARS.md](./GEARS.md)), carries: the gap inherited from the previous step, the smallest change that closes it, the observable end state, practice in the chosen form, and the gap it leaves behind.
+Each step file follows [STEP-FORMAT.md](./references/STEP-FORMAT.md) and, per the chosen gear ([GEARS.md](./references/GEARS.md)), carries: the gap inherited from the previous step, the smallest change that closes it, the observable end state, practice in the chosen form, and the gap it leaves behind.
 
 For a code gear, the learner's code must reach the recorded end state before the step is done — run it, or have the learner run it and report back. A step whose end state was never observed is not done.
 
