@@ -7,9 +7,9 @@ Beautiful and printable. Tufte, not slide deck: generous margins, readable measu
 ## Sections, in order
 
 1. **Where we are** — one paragraph: what the build does today, and the gap inherited from the previous step. Link back to it by anchor. For step 1, this is the empty workspace and why the first brick is first.
-2. **The gap** — the concrete case the current build cannot handle, shown rather than asserted: the failing input, the missing behaviour, the trace that dead-ends.
-3. **The move** — the smallest change that closes the gap, and *why this and not the obvious alternative*. Cite the source for how the real system does it.
-4. **The build** — the change itself. On code gears, exactly what the learner types, at the recorded build site. On paper gears, the illustration code and a trace through it.
+2. **The gap** — the concrete case the current build cannot handle, shown rather than asserted: the failing input, the missing behaviour, the trace that dead-ends. Stated so the learner feels it — a frustrating case in terms they already have, before any name for the fix.
+3. **The move** — the smallest change that closes the gap, and *why this and not the obvious alternative*. Cite the source for how the real system does it. First contact with a new concept lands on an example the learner can picture (see the Examples section of `SKILL.md`) — often the life example for the shape, the domain example right after for the real thing.
+4. **The build** — the change itself. On code gears, exactly what the learner types, at the recorded build site. On paper gears, the illustration code and a trace through it. Narrate the tricky parts as you go — what this line is for, why that order — so the learner is never staring at bare code.
 5. **Proof** — the observable end state, stated so the learner can check it: the command and its expected output, the passing test, or the trace's final value. On code gears the learner must actually reach this.
 6. **Practice** — in the form chosen at intake. See `SKILL.md`.
 7. **The next gap** — what this step still cannot do, handing off to the next step. Link forward once that step exists.
@@ -17,6 +17,8 @@ Beautiful and printable. Tufte, not slide deck: generous margins, readable measu
 ## Requirements
 
 - **One brick.** If the file teaches two additions, it is two steps.
+- **Written to be understood, in the voice of `SKILL.md`.** Short sentences, plain words, no unexplained term. The learner is a smart beginner in this system, not a child — concrete and warm, never dumbed-down.
+- **No abstract concepts.** Every concept lands on an example the learner can picture — life, domain, or both (see `SKILL.md`).
 - **Cite every claim** about the target: file and line for a repo, section for a paper. Say plainly when you are reconstructing rather than reading.
 - **One primary source** to read or watch, the highest-trust one you found.
 - **Ask-your-teacher reminder** — a short line telling the learner to bring anything unclear back to the agent.
