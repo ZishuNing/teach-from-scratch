@@ -17,7 +17,7 @@ Beautiful and printable. Tufte, not slide deck: generous margins, readable measu
 ## Requirements
 
 - **One brick.** If the file teaches two additions, it is two steps.
-- **Written to be understood, in the voice of `SKILL.md`.** Short sentences, plain words, no unexplained term. The learner is a smart beginner in this system, not a child — concrete and warm, never dumbed-down.
+- **Written to be understood, in the voice of `SKILL.md`.** Short sentences, plain words, no unexplained term. The learner is a smart beginner in this system, not a child — concrete and warm, never dumbed-down. Pass the prose rules in `SKILL.md`'s Voice section before shipping: no structure previews, no propped-up misunderstandings, no filler scene-setting, land and stop.
 - **No abstract concepts.** Every concept lands on an example the learner can picture — life, domain, or both (see `SKILL.md`).
 - **Cite every claim** about the target: file and line for a repo, section for a paper. Say plainly when you are reconstructing rather than reading.
 - **One primary source** to read or watch, the highest-trust one you found.

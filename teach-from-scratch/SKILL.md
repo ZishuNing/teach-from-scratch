@@ -18,11 +18,21 @@ Some techniques worth stealing:
 - **Reason from the learner's side.** Follow what they are probably thinking, then respond: *so you'd think we could just... — let's try it.* Answer the questions they would ask, in the order they would ask them.
 - **Say what things are for, not just what they are.** *The point of X is Y — without it, Z happens.*
 - **Name feelings.** Confusion, surprise, the small win when it finally runs — *this looks wrong at first; it's fine.* An explanation that never touches the learner's experience reads like a manual no matter how clear it is.
-- **Signpost lightly.** *So far... What just happened? Now...* and short summaries at natural seams, so the learner always knows where they are standing.
+- **Signpost lightly.** *So far... What just happened? Now...* so the learner always knows where they are standing — one line at a seam, never a summary of what was just said.
 
 **Calibrate, never talk down.** Simple words, full respect. Pitch at the level the learner shows you, and correct it in `NOTES.md` as you learn more. The failure at one extreme is jargon that assumes what was never taught; the failure at the other is dumbing-down. Both are the same mistake — writing at yourself instead of at the learner.
 
 **On "simpler":** when the learner asks to make it simpler, they are asking for a clearer on-ramp — the same idea with a shallower entry, more concreteness, less assumed context. Never a chattier or more childish tone. The respect and the material stay; the climb gets gentler.
+
+**Write like a person, not a model.** Adapted from [human-writing](https://github.com/KKKKhazix/human-writing) — the prose rules below come from that skill:
+
+- **Touch the thing fast.** Open on what just ran, what broke, the number that surprised you. Never preview the section's structure (*we'll cover three things today*).
+- **Every paragraph adds one new thing** — a fact, an action, an example, a consequence. Restating the last paragraph in new words is not progress.
+- **Subject and verb early.** Let the reader know who did what within the first few words; hang time, causes, and conditions after.
+- **Judge plainly.** Lead with the verdict, then the evidence. Never prop up a misunderstanding the learner doesn't hold just to knock it down — *it's not X, it's Y*, *the real problem is...* and every rewording of that move.
+- **Verbs stay verbs.** *It sped up by X* or *saved two people*, never *achieved an improvement in efficiency*.
+- **No filler scene-setting** to fake warmth — no coffee cups, no *let's dive in*, no invented late-night debugging vignettes. Detail earns its place by carrying information.
+- **Land and stop.** When the thing is said, end. No grand conclusions, no summary of what was just said, no callbacks that changed nothing.
 
 ## Examples
 
@@ -53,6 +63,8 @@ Never introduce a concept before its gap has been felt. An abstraction that arri
 - `./build/` — the code the learner writes, when the build site is a sandbox in this workspace. On `simplified-paper` / `full-paper` it does not exist.
 
 Author steps and reference in the user's language. Keep code, identifiers, and paths in their original form.
+
+For Chinese-language builds, also read [human-writing](https://github.com/KKKKhazix/human-writing) and apply its full prose rules — its revision bans (colons as signposts, dashes, reversal rhetoric) are the checklist for a step's final pass.
 
 ## Step 1 — Intake
 
