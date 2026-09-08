@@ -1,44 +1,31 @@
-# Gears
+# 学习方式与深度
 
-The gear is chosen at intake and governs every later decision: how many steps the chain has, how deep each one goes, and whether the learner writes code at all. Record it in `BUILD-PLAN.md`.
+先看用户学完要做什么，再决定怎么教。档位是备课信息，不是学习者必须填写的配置；已说明的选择不要再问。用户的明确要求优先于默认值。
 
-Two families:
+## 对用户怎么说
 
-- **Paper gears** build on the page. No project, no toolchain. Code appears as illustration only — snippets the learner reads and traces, never runs. The learner ends with a mental model of how the system is assembled.
-- **Code gears** build in a real workspace. The learner types code and observes it work. The build site is decided at intake: a sandbox `./build/`, or the user's own project when the target only lives inside a host.
+“想先看懂它怎么工作，还是边讲边自己做？”只有答案会影响眼前教学、且上下文无法判断时才问。对源码理解请求，先用具体数据推演；对明确的实现学习请求，安排逐步动手。
 
-## `simplified-paper`
+方式与深度独立调整：不写代码也能深入实现，亲手写代码也可以只做最小模型。节奏慢不等于内容浅，文字短也不等于好理解。
 
-The shortest honest path from zero to a working mental model. Roughly 3–5 steps, each one a major architectural move. Skip every detail that is not load-bearing for the shape of the system.
+## 兼容旧档位
 
-- Illustration code: pseudocode or heavily elided real code
-- End state per step: a worked-through trace, or a diagram the learner can redraw from memory
-- Use when the learner wants to see *how a system like this gets built*, not build one
+| 记录值 | 学习者真正要做的事 | 备课边界 |
+| --- | --- | --- |
+| `simplified-paper` | 先弄懂主线，能用自己的话解释 | 用少量关键情形串起机制，标出省略，不按固定课数凑内容 |
+| `full-paper` | 不搭运行环境，但要看懂目标的关键实现和取舍 | 阅读实际来源，追踪关键数据与调用；深到学习目标需要为止，不承诺穷尽代码库 |
+| `skeleton` | 亲手接通一个最小系统，观察数据怎么走 | 提供可运行的接口和连接；明确哪些实现是替身、它们尚未证明什么 |
+| `full` | 亲手实现目标范围内的真实行为 | 逐步实现并验证；生产可用性、安全和性能不能仅凭教学示例保证 |
 
-## `full-paper`
+纸上推演可使用伪代码或真实代码片段，必须说明性质，不要求建工程或编译。代码练习需要确认放在哪里：能独立运行的用课程内沙盒；依赖宿主项目的先确认环境和修改范围，不能擅自把教学代码写进用户工程。
 
-The same page-only form, at full fidelity. Every non-trivial decision gets its own step and its own gap. Nothing structural is elided.
+默认先用纸上例子建立理解，不静默创建代码工程。用户指定了写代码、忠实追踪源码或已有课程档位时，沿用其选择，不降回默认。
 
-- Illustration code: real code, cited to file and line
-- End state per step: a trace the learner can follow line by line
-- Use when the learner wants complete understanding but has no intention of writing the code
+## 中途调整
 
-## `skeleton`
+- “听不懂”“太生涩”：先找缺失的前置知识，缩小例子，展示中间变化；不要直接降档或删掉机制。
+- “这些我会”：略过已确认掌握的内容，加快进入新问题，不强迫完成旧练习。
+- “讲深一点”：沿当前例子补出实现、取舍或边界，不从头重讲一遍入门版。
+- “想亲手做”：保留已讲内容，增加当前所需的环境准备与练习，不重建整条课程。
 
-A real workspace, built as an end-to-end walking skeleton: interfaces, wiring, and mocks. Every layer exists and the whole thing runs; the depth behind each interface is stubbed.
-
-- The learner writes types, signatures, and wiring — mocks stand in for real implementations
-- End state per step: it runs, and the seam the step added is visible in the output
-- Use when the learner cares about architecture and data flow, and treats the internals as replaceable
-
-## `full`
-
-A real workspace where every step is genuinely implemented, runnable, and — where the host supports it — tested. The finest gear, and the longest chain.
-
-- The learner writes working code, mocks only at true external boundaries
-- End state per step: it runs and produces the real behaviour; a passing test where the project has tests
-- Use when the learner wants the working system, not a model of it
-
-## Choosing
-
-Ask; do not infer silently. When the user is unsure, ask what they will do with the knowledge — model-building points at a paper gear, shipping something points at a code gear. Gears can be upgraded mid-build: keep the finished steps and re-tear-down the remaining chain at the new gear, recording the change in `BUILD-PLAN.md`.
+计划里只在选择确实改变时记一次原因。旧课程的 `quiz`、`write-it-yourself`、`both` 仍是有效偏好；允许增加 `none` 或改成口头预测，不把某种练习永久锁死。

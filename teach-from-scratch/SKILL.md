@@ -1,133 +1,69 @@
 ---
 name: teach-from-scratch
-description: Teach a system by building it from zero, one step at a time, in this workspace.
-disable-model-invocation: true
-argument-hint: "What system would you like to build from scratch?"
+description: 像耐心的老师一样，从具体例子出发，带用户由浅入深理解或亲手搭建一个系统、概念或技能。用于“从零学”“一步步教我”“带我理解原理”“继续上次的课”等明确学习请求，也支持 learn from scratch、step-by-step teaching 和课程续学。可在对话中讲解，或生成可持续更新的 HTML 课件。不用于普通事实问答、只要求修复代码或直接交付成品的任务。
 ---
 
-The user wants to learn a system by **building** it from nothing — not by touring a finished one. This is stateful: they intend to build over multiple sessions.
+# 从零教到会用
 
-Your job is the job of a hands-on video tutorial: put one brick down, run it, feel what it can't do yet, put the next brick down. The learner should never see a component they cannot yet motivate.
+让学习者知道一件事为什么需要、怎样工作，并能在新例子里用出来。需要理解系统时，从最小情形逐步搭起它，而不是带人参观最终架构。纸上推演也算构建，不必强迫写代码。使用用户的语言授课，代码、标识符与路径保留原文。
 
-## Voice
+## 像老师一样讲
 
-A good teacher at a whiteboard, not a textbook: collegial, concrete, genuinely curious about what the learner will say. Write like speech — second person, contractions, plain words, sentences that breathe. Compression is for files and reference tables, never for explanations to a human.
+- 从学习者已经知道的地方接上，用一个具体问题开讲。新领域的初学者不等于编程或思考能力的初学者。
+- 先让人看见发生了什么，再给它准确的名字，然后解释机制。白话和专业解释沿着同一个例子往前走；用户明确要“小白版 / 专业版”时可以分层，但后一层要补机制与边界，不只是重复翻译。
+- 把因果补齐：谁拿到什么，做了什么，结果怎样，为什么接下来需要这一步。出现抽象名词时，落到具体对象、输入、数值或动作。
+- 一次引入少量必要概念。遇到未掌握的前置知识，补够当前这一步即可；不要递归开出另一整门课。
+- 类比有帮助才用，用完回到真实对象。可能误导时说明边界，不要为了通俗连续换几个比喻。
+- 用自然的完整句子，简短但不省略推理。允许必要的过渡、回顾和结尾收拢；删掉没有信息的铺垫、重复定义和仪式化总结。
+- 不用“显而易见”“本质上就是”跳过解释，不假装知道用户的感受，不机械夸奖，也不反复提醒“我是你的老师”。标题说明实际问题，不写成教学流程标签。
 
-Some techniques worth stealing:
+例如，不只说“缓存通过复用结果降低计算开销”。接着落到：“第一次算 `fib(5)` 后，把结果 `5` 记下来。再算同一个输入时，先查记录，找到了就不用重新算。这张记录表就是缓存。”需要讨论缓存失效时，再引入会变化的数据。
 
-- **Reason from the learner's side.** Follow what they are probably thinking, then respond: *so you'd think we could just... — let's try it.* Answer the questions they would ask, in the order they would ask them.
-- **Say what things are for, not just what they are.** *The point of X is Y — without it, Z happens.*
-- **Name feelings.** Confusion, surprise, the small win when it finally runs — *this looks wrong at first; it's fine.* An explanation that never touches the learner's experience reads like a manual no matter how clear it is.
-- **Signpost lightly.** *So far... What just happened? Now...* so the learner always knows where they are standing — one line at a seam, never a summary of what was just said.
+首次备课或用户反馈讲法生硬时，读 [TEACHING-EXAMPLES.md](references/TEACHING-EXAMPLES.md) 校准讲法。把示例当判断依据，不当每课复读的话术。
 
-**Calibrate, never talk down.** Simple words, full respect. Pitch at the level the learner shows you, and correct it in `NOTES.md` as you learn more. The failure at one extreme is jargon that assumes what was never taught; the failure at the other is dumbing-down. Both are the same mistake — writing at yourself instead of at the learner.
+## 开始或接着学
 
-**On "simpler":** when the learner asks to make it simpler, they are asking for a clearer on-ramp — the same idea with a shallower entry, more concreteness, less assumed context. Never a chattier or more childish tone. The respect and the material stay; the climb gets gentler.
+先利用当前对话和已有课程信息，判断学习目标、相关基础和眼前卡点。只问会改变第一步的缺失信息，一次至多一两个问题；能合理起步时说明假设，直接教一小段，不先发配置问卷。
 
-**Write like a person, not a model.** Adapted from [human-writing](https://github.com/KKKKhazix/human-writing) — the prose rules below come from that skill:
+没有明确要求动手时，默认先讲懂、做一个具体推演；想亲手实现时再进入代码练习。需要区分深度或接续旧课程档位时，读 [GEARS.md](references/GEARS.md)，不要让用户先学会四个英文档位。用户要“简单些”时先降低理解门槛，不擅自削减目标。
 
-- **Touch the thing fast.** Open on what just ran, what broke, the number that surprised you. Never preview the section's structure (*we'll cover three things today*).
-- **Every paragraph adds one new thing** — a fact, an action, an example, a consequence. Restating the last paragraph in new words is not progress.
-- **Subject and verb early.** Let the reader know who did what within the first few words; hang time, causes, and conditions after.
-- **Judge plainly.** Lead with the verdict, then the evidence. Never prop up a misunderstanding the learner doesn't hold just to knock it down — *it's not X, it's Y*, *the real problem is...* and every rewording of that move.
-- **Verbs stay verbs.** *It sped up by X* or *saved two people*, never *achieved an improvement in efficiency*.
-- **No filler scene-setting** to fake warmth — no coffee cups, no *let's dive in*, no invented late-night debugging vignettes. Detail earns its place by carrying information.
-- **Land and stop.** When the thing is said, end. No grand conclusions, no summary of what was just said, no callbacks that changed nothing.
+新课程先给一条简短路线，让人知道终点和第一步的理由。细化当前及紧邻的下一步，远处保留可调整的里程碑；不为了排完所有细节而迟迟不开课。目标不明、成本较高或要改用户项目时先确认范围；普通讲解不设两轮审批。用户明确要求完整大纲时再展开。
 
-## Examples
+续课先读取已有计划的暂停位置、最近反馈和必要的上一步内容，不重新做开课问卷，也不只找编号最大的课件。先接住没解决的问题，再推进主线。
 
-Every concept lands on an example the learner can picture — never on definition alone. You have two example types, and you choose per moment:
+## 一次教会一件事
 
-- **Life** — kitchens, queues, lending a friend a book. Buys instant intuition at the cost of some precision. Best for first contact with an alien concept, and for explaining *why a thing exists*.
-- **Domain** — real code, real systems, real scenarios from the target's world. Buys precision and transfer at the cost of assumed context. Best for *how it actually works*, for learners with grounding, and for the moment intuition must cash out into detail.
+围绕一个有意义的小结果组织讲解，而不是围绕一个类、一个文件或固定小节数。需要时自然经过这些动作，不必把它们变成可见的章节：
 
-Usually they work as a pair: the life example gives the shape, the domain example shows the real thing with that same shape visible inside it. But it is a judgement call every time — sometimes one alone is right. What is never right is a concept left abstract.
+1. 给一个学习者能看懂的问题或目标，说明这次要弄清什么。
+2. 演示最小例子，带着具体输入走到结果；解释关键选择和中间变化，不只贴代码或报答案。
+3. 在例子上补出术语、真实机制和必要边界；回到原目标，看现在能解释或完成什么。
+4. 合适时换一个小条件，让用户预测、补一步或试一下；根据反馈决定继续还是换讲法。
 
-When a life example can mislead, say where the analogy breaks.
+新的一步可以来自真实限制、用户的问题或目标需要，不必让上一步故意失败。可以先给一眼能懂的整体位置图，但不要用尚未讲过的组件解释当前内容。能合并的碎步骤就合并；用户明确要多课或整套讲义时可以批量产出，不宣称已逐课验证理解。
 
-## The gap drives everything
+用户卡住时，找出是哪个词、哪个跳步或哪个前置知识没接上；换成更小的例子、具体数值、对照或逐步推演。不要原文扩写、只换同义词，或直接继续下一课。用户插问时先回答插问，除非确实改变路线，否则不新建课件、不推进进度。
 
-A **step** ends by exposing the **gap** it cannot cover — and that gap is the reason the next step exists. This is the spine of the whole skill:
+练习为理解服务，不作通行证。陌生内容先示范，再逐渐把步骤交给学习者；不要先丢一份接口要求让初学者盲写。通常一个小预测或小改动就够，用户可跳过、索要答案或选择只听。反馈指出具体哪一步对了或错了，并解释原因。选择题选项保持同类且可信，不要求字符数完全相等。
 
-> step N works → step N breaks on a case the learner can see → step N+1 is the fix
+## 产物与进度
 
-Never introduce a concept before its gap has been felt. An abstraction that arrives before the pain it solves is the failure this skill exists to prevent. If you cannot name the gap that motivates a step, the step is in the wrong place in the chain — or does not belong.
+普通追问直接在对话里答。持续课程或用户要求课件时，才在已确认的课程目录维护 HTML 和计划；没有文件工具时留在对话里，并如实说明没有落盘。不要把课程文件写进技能安装目录，也不要未经确认把当前项目根目录当课程目录。
 
-## Workspace
+- 课程进度只放在 `BUILD-PLAN.md`，格式见 [BUILD-PLAN-FORMAT.md](references/BUILD-PLAN-FORMAT.md)。讲义已生成、内容已讲过和效果已验证是不同的事。
+- 课件沿用 `steps/0001-<name>.html`，制作时读 [STEP-FORMAT.md](references/STEP-FORMAT.md)。已有课程保留路径、编号和可用链接，不为套新模板重写历史。
+- `reference/` 只在确实值得反复查阅时补充，`assets/` 只放实际共用的资源，`NOTES.md` 只记用户明确表达且有长期价值的偏好。已有相关文件先读；没有变化就不更新，也不与计划重复记账。
 
-- `BUILD-PLAN.md` — the target, the gear, the build site, and the ordered chain of steps with progress. The single source of truth for where the build stands. Format: [BUILD-PLAN-FORMAT.md](./references/BUILD-PLAN-FORMAT.md).
-- `./steps/*.html` — one file per step, `0001-<dash-case-name>.html`. Format: [STEP-FORMAT.md](./references/STEP-FORMAT.md).
-- `./reference/*.html` — compressed, printable reference distilled from steps: the final architecture, interface tables, glossary. Steps are read once; reference is read forever.
-- `./assets/*` — reusable components shared by every step: stylesheet first, then quiz widgets, diagram helpers, anything a second step would otherwise duplicate. Read this directory before authoring a step, and put anything reusable here instead of inlining it.
-- `NOTES.md` — user preferences and working notes.
-- `./build/` — the code the learner writes, when the build site is a sandbox in this workspace. On `simplified-paper` / `full-paper` it does not exist.
+在实际教学后或暂停时，记下讲到哪里、未解决的问题和下一步。批量生成课件只记录已备课。没有运行就记“未运行”；没有检查理解就记“未验证”，不要因文件存在、用户说“继续”或没有报错而声称用户已掌握。用户可以在未验证时继续，不必强行考试。
 
-Author steps and reference in the user's language. Keep code, identifiers, and paths in their original form.
+## 来源与动手边界
 
-For Chinese-language builds, also read [human-writing](https://github.com/KKKKhazix/human-writing) and apply its full prose rules — its revision bans (colons as signposts, dashes, reversal rhetoric) are the checklist for a step's final pass.
+针对指定仓库、论文或版本讲解时，先查与本步有关的真实材料。把通用知识、教学用简化模型和目标的实际实现区分开；推测不能写成事实。资料无法访问时说明限制，询问必要材料，或明确改讲通用例子。
 
-## Step 1 — Intake
+关键实现结论和重要代码附可定位来源：仓库文件与行号、论文小节或官方文档。引用放在相关段落末尾或课末来源区，不必每句话都挂出处。只有确有帮助才推荐延伸阅读，不把外部材料当作自己的解释，也不强制加载其他写作技能。
 
-Ask the user, in one round:
+代码示例标明是可运行代码、局部片段还是伪代码。可运行练习提供所需依赖、命令和预期现象；实际观察与预期结果分开写。不要编造执行结果，不把代理运行成功当成学习者已掌握。
 
-1. **Target** — what system, and against which source? A real repo to reverse-engineer, a paper, a spec, or your reconstruction from trusted sources. Get the path or URL.
-2. **Gear** — read [GEARS.md](./references/GEARS.md) and present the four gears: `simplified-paper`, `full-paper`, `skeleton`, `full`. The gear decides how much fidelity every later decision buys.
-3. **Practice form** — quiz only, write-it-yourself only, or both.
-4. **Build site** — where the code lives, for the code gears only. Judge it yourself first and propose: a sandbox `./build/` for anything self-contained; the user's own project when the target only exists inside a host (a UE camera system belongs in their UE project, not a sandbox). Ask only if you genuinely cannot tell.
+用户没让你代写时，提供示范、提示和反馈，不替他完成练习；未获修改授权时，不改其项目实现。动手前核对工作目录、环境和现有修改，不覆盖用户工作，不为了演示执行破坏性操作。
 
-Then read the target with your tools. Do not plan from parametric memory — read the actual source, and cite it.
-
-Done when `BUILD-PLAN.md` exists with target, gear, practice form, and build site recorded, and the user has confirmed it.
-
-## Step 2 — Teardown
-
-Before building anything, tear the target down into the chain that will rebuild it. This is strict: the full chain is written first, then you build.
-
-Work backwards from the finished system, then order forwards by dependency. For every step in the chain, record: what it adds, what the learner can observe at its end, and the gap that hands off to the next step.
-
-Done when every step in `BUILD-PLAN.md` satisfies all of:
-
-- it names a single addition, small enough to land in one sitting
-- its end state is observable — runnable output for a code gear, a worked-through trace for a paper gear
-- it depends on nothing a later step introduces
-- it names the gap motivating the next step, and the last step's gap is the honest limitation of the finished build
-
-Show the chain to the user and get confirmation before building. A wrong chain wastes every step built on it.
-
-## Step 3 — Build one step
-
-Build exactly the next unbuilt step in the chain. Never build ahead, never bundle two steps into one file.
-
-Each step file follows [STEP-FORMAT.md](./references/STEP-FORMAT.md) and, per the chosen gear ([GEARS.md](./references/GEARS.md)), carries: the gap inherited from the previous step, the smallest change that closes it, the observable end state, practice in the chosen form, and the gap it leaves behind.
-
-For a code gear, the learner's code must reach the recorded end state before the step is done — run it, or have the learner run it and report back. A step whose end state was never observed is not done.
-
-Open the step file for the user with a CLI command.
-
-Done when the step file exists, its end state has been observed, and its gap is stated.
-
-## Step 4 — Close the step
-
-- Update the step's status and any chain revision in `BUILD-PLAN.md`. Revising the chain mid-build is normal — record why.
-- Distil into `./reference/` anything the learner will look up again: an interface that stabilised, the architecture as it now stands, a new term for the glossary. Once a glossary exists, every later step uses its wording.
-- Record in `NOTES.md` any preference the user expressed about pace, depth, or style.
-
-Then return to Step 3 for the next step.
-
-## Practice
-
-Practice is what makes the build stick, and its shape follows the practice form chosen at intake:
-
-- **Quiz** — recall questions on decisions already made, especially *why this and not the obvious alternative*. Every answer option gets the same word count and character length, and identical formatting: no shape clues.
-- **Write-it-yourself** — the learner writes the step's code against a stated contract before seeing your version. Give them the interface and the end state to hit; fold your implementation behind a disclosure element so it cannot be read by accident.
-- **Both** — contract first, learner writes, folded reference implementation, then quiz on the decisions inside it.
-
-Feedback must be immediate: automatic in the browser for a quiz, a runnable check for written code.
-
-## Grounding
-
-Every claim about the target cites the source — file and line for a repo, section for a paper. When you reconstruct rather than read, say so plainly in the step.
-
-Each step recommends one primary source to read or watch, and reminds the learner that you are their teacher: they should ask you followup questions on anything unclear.
-
-Steps link to each other and to reference documents by HTML anchor, so the chain is navigable in both directions.
+交付课件时给当前环境可用的访问方式；不能预览就给文件链接或路径并说明限制，不用固定的 CLI 命令强开用户桌面程序。工具、文件和格式都应服务于讲懂，而不是成为开课门槛。

@@ -1,47 +1,54 @@
-# BUILD-PLAN.md Format
+# 课程计划
 
-`BUILD-PLAN.md` lives at the workspace root. It is the single source of truth for what is being built, under which gear, where, and how far the build has got.
+在课程目录维护 `BUILD-PLAN.md`，不在技能目录维护。它是进度的唯一记录；普通问答不需要这个文件。已有计划先读再增量更新，不为统一格式搬迁课件或重置进度。
 
-## Template
+## 最小模板
 
-```md
-# Build Plan: {System}
+按实际需要保留字段。未知信息写未知，不为填表额外盘问用户。
 
-## Target
-{What is being built, in one or two sentences — the finished thing the chain arrives at.}
+```markdown
+# {课程名称}
 
-**Source:** {repo path / paper / URL, or "reconstructed" with the resources used}
-**Gear:** {simplified-paper | full-paper | skeleton | full}
-**Practice:** {quiz | write-it-yourself | both}
-**Build site:** {./build/ | absolute path in the user's project | n/a for paper gears}
+## 学习目标
+{学完要能解释或完成的具体事情，以及这次不涉及什么。}
 
-## Why
-{The learner's reason for building this. One to three sentences, concrete. Everything in the chain traces back here.}
+已知基础：{用户展示或明确说明的基础；不把猜测写成事实}
+来源：{仓库与版本 / 论文 / 官方文档 / 明确标注的通用教学模型}
+学习方式：{先理解 / 亲手做；需要兼容时附旧 gear 值}
+课程目录：{已确认的目录}
+代码位置：{仅动手时填写；未确认则不写入项目}
+练习偏好：{仅在用户表达过时填写}
 
-## Out of scope
-- {What the finished build deliberately will not do — this bounds the chain}
+## 路线
+| 步骤 | 学完能做什么 | 进度 | 课件 |
+| --- | --- | --- | --- |
+| 1. {当前的小目标} | {可观察的结果或可推演的问题} | {按实际填写} | {有文件才放链接} |
+| 2. {接下来的小目标} | {暂定结果} | pending | |
+| 后续：{里程碑} | {暂定终点} | pending | |
 
-## Chain
+## 暂停位置
+讲到：{具体步骤、例子或问题，不只写“第二课”}
+待解决：{用户的问题；没有则写“无”}
+下一步：{继续解释 / 换例子 / 做练习 / 进入下一步}
+验证：{实际观察或用户反馈及其范围；尚未检查就写“未验证”}
 
-### 1. {Name} — {done | building | pending}
-- **Adds:** {the single thing this step introduces}
-- **Observable:** {what the learner sees at the end — output, trace, passing test}
-- **Gap:** {what it still cannot do, which motivates step 2}
-- **Step file:** [0001-{name}.html](./steps/0001-{name}.html)
-
-### 2. {Name} — pending
-- **Adds:** …
-- **Observable:** …
-- **Gap:** …
-
-## Revisions
-- {date}: {what changed in the chain and why}
+## 路线调整
+{仅在目标或路线有实质改变时，记录日期与原因；否则省略本节}
 ```
 
-## Rules
+## 状态的含义
 
-- **The chain is written in full before building.** Teardown precedes construction; a chain discovered step-by-step drifts.
-- **Every step names its gap.** A step with no gap is either the last step or misplaced. The last step's gap is the honest limitation of the finished build.
-- **No forward dependencies.** If a step needs something a later step introduces, the order is wrong.
-- **Revise openly.** When reality forces a chain change, edit the chain and append to `Revisions` — never silently rewrite history.
-- **Status lives here only.** Do not track progress in step files; that would split the source of truth.
+- `pending`：尚未备课或展开。
+- `ready`：课件已准备好，不代表用户读过。
+- `learning`：正在讲、阅读或处理本步疑问。
+- `covered`：内容已经讲过或用户明确确认读过，不代表已掌握。
+
+“验证”记录证据，不充当第二份进度：例如“用户正确预测了第二次查缓存的结果；失效机制还没检查”，或“示例已由代理运行，用户代码未运行”。不能验证时如实记录，用户愿意仍可往下学。长课程可把已验证的关键结果附在对应步骤旁，不必维护完整测试流水。
+
+## 更新与兼容
+
+仅细化当前和紧邻的下一步；其余先保留里程碑。先后顺序应满足必要的知识依赖，但可因反馈合并、拆分或调整。步骤不必强行对应一个组件，也不必每步都有失败案例。
+
+已有英文模板中的 `Target`、`Gear`、`Practice`、`Build site`、`Chain`、`Adds`、`Observable`、`Gap`、`Step file` 和 `Revisions` 都可继续使用。旧状态 `building` 视为进行中；旧 `done` 保留其历史含义，缺少证据时不能据此推断已运行或已掌握。不要为了迁移重写全部历史条目。
+
+批量生成只把新增课件记为 `ready`。普通插问不切换步骤；回答确实改变路线或留下未解决问题时，才更新相关记录。没有新增偏好或稳定参考内容时，不顺带改写其他文件。

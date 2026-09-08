@@ -1,26 +1,39 @@
-# STEP-FORMAT.md
+# HTML 课件
 
-A step is one self-contained HTML file in `./steps/`, named `0001-<dash-case-name>.html`. It teaches one brick: the gap it closes, the change that closes it, proof it works, practice, and the gap it leaves.
+一份课件围绕一个有意义的学习结果，保存在课程目录的 `steps/0001-<name>.html`。沿用已有编号、路径和视觉风格。对话里的短追问不必生成文件；用户要求多课时按目标分文件，不机械限制一次只能生成一个。
 
-Beautiful and printable. Tufte, not slide deck: generous margins, readable measure, restrained rules, no decoration that carries no information. Link `../assets/style.css` — never inline what belongs in the shared stylesheet.
+## 先写能读懂的讲解
 
-## Sections, in order
+默认让读者沿一个例子看见问题、变化和结果，再把它接回真实机制。用叙述串起因果，按内容需要加少量标题。标题可以是“第二次查询时发生了什么”，不必是“背景 / 缺口 / 改动 / 构建 / 证明 / 练习 / 下一缺口”。
 
-1. **Where we are** — one paragraph: what the build does today, and the gap inherited from the previous step. Link back to it by anchor. For step 1, this is the empty workspace and why the first brick is first.
-2. **The gap** — the concrete case the current build cannot handle, shown rather than asserted: the failing input, the missing behaviour, the trace that dead-ends. Stated so the learner feels it — a frustrating case in terms they already have, before any name for the fix.
-3. **The move** — the smallest change that closes the gap, and *why this and not the obvious alternative*. Cite the source for how the real system does it. First contact with a new concept lands on an example the learner can picture (see the Examples section of `SKILL.md`) — often the life example for the shape, the domain example right after for the real thing.
-4. **The build** — the change itself. On code gears, exactly what the learner types, at the recorded build site. On paper gears, the illustration code and a trace through it. Narrate the tricky parts as you go — what this line is for, why that order — so the learner is never staring at bare code.
-5. **Proof** — the observable end state, stated so the learner can check it: the command and its expected output, the passing test, or the trace's final value. On code gears the learner must actually reach this.
-6. **Practice** — in the form chosen at intake. See `SKILL.md`.
-7. **The next gap** — what this step still cannot do, handing off to the next step. Link forward once that step exists.
+这些是备课检查项，不是必须依次出现的七个章节：
 
-## Requirements
+- 读者能知道这次在解决什么，以及需要哪些已讲过的知识。
+- 至少有一个具体例子展示关键中间过程，代码和图没有替代解释。
+- 新术语接在可理解的现象后面，重要简化及类比边界已说明。
+- 读者能看到结果，或有办法检查结果；预期现象与实际验证分开。
+- 如安排练习，它只检查已教过的内容，并有可访问的反馈或参考答案。
 
-- **One brick.** If the file teaches two additions, it is two steps.
-- **Written to be understood, in the voice of `SKILL.md`.** Short sentences, plain words, no unexplained term. The learner is a smart beginner in this system, not a child — concrete and warm, never dumbed-down. Pass the prose rules in `SKILL.md`'s Voice section before shipping: no structure previews, no propped-up misunderstandings, no filler scene-setting, land and stop.
-- **No abstract concepts.** Every concept lands on an example the learner can picture — life, domain, or both (see `SKILL.md`).
-- **Cite every claim** about the target: file and line for a repo, section for a paper. Say plainly when you are reconstructing rather than reading.
-- **One primary source** to read or watch, the highest-trust one you found.
-- **Ask-your-teacher reminder** — a short line telling the learner to bring anything unclear back to the agent.
-- **Anchors both ways** — previous step, next step, and any reference document the step distils into.
-- **Reference implementations fold.** On write-it-yourself practice, put your version inside a `<details>` element so it cannot be read by accident.
+必要的回顾可以保留；不重复三遍同一个“缺口”，不强加课末阅读作业、老师提醒和悬念。下一步的理由自然出现即可，没有必要延伸时就在本课结果处结束。
+
+## 展示和交互
+
+使用语义化 HTML，包含 `lang`、UTF-8 声明、viewport 和描述性标题。正文宽度、行距与字号适合长时间阅读，手机也能看，代码可以横向滚动。优先文本、表格和有文字解释的简单图；不要为一节课引入构建工具或应用框架。
+
+多课共用的样式放在 `../assets/style.css`；文件必须存在再引用。资源用相对路径，默认离线可读，不靠 CDN、网络字体或远程脚本才能看到正文和答案。单独分发课件时附带资源，或应用户要求做成真正自包含的文件，不把依赖外部样式的 HTML 称为自包含。
+
+学习者练习前能看到题目、必要提示与预期结果。完整练习解答可放进 `<details><summary>查看思路和答案</summary>...</details>`，但不要把第一次教学示范也藏起来。代码展示应转义 HTML 特殊字符。
+
+能用原生 `<details>` 提供反馈时，不搭测验系统。确需自动评分时使用本地脚本和语义化按钮，支持键盘操作，解释答案为什么成立；不能只用颜色表示对错，也不能靠选项字数暗示答案。没有 JavaScript 时仍应能读到课程与答案。
+
+需要图时使用文本图、可读表格或带说明的静态 SVG；不要把未配置渲染器的 Mermaid 源码当成已渲染图交付。打印时保留正文、代码与参考答案，去掉无用按钮。
+
+## 导航与来源
+
+只链接实际存在的上一课、下一课和参考文件，使用相对地址和稳定锚点。下一课尚不存在时写普通文字，不生成死链接；它创建后再补链接。学习进度以计划为准，不在课件中维护一份“已完成”状态。
+
+源码实现的关键结论保留可定位出处；可以把密集引用集中在课末，并用锚点关联正文。文件行号和代码片段必须与读到的版本一致。公开课件中不带入用户私有代码、绝对工作路径或机密资料，除非用户明确授权分享。
+
+## 交付前检查
+
+检查资源与锚点是否存在、代码是否正确转义、示例是否自洽、解答能否展开。具备浏览器能力时再检查阅读、键盘交互和打印样式；未实际预览或执行的部分如实说明。沿用宿主环境支持的预览或下载方式，不默认在用户电脑弹出浏览器，也不声称对方已经看到。
